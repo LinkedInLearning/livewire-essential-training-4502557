@@ -7,9 +7,11 @@ use Livewire\Component;
 class CoinFlip extends Component
 {
 
-    public string $coin = 'Always tails!';
+    public string $coin = 'Click the flip button to flip a coin!';
+    public string $last = '';
 
-    public function mount() {
+    public function flip() {
+        $this->last = $this->coin;
         $this->coin = rand(0, 1) ? 'Heads!' : 'Tails!';
     }
 
