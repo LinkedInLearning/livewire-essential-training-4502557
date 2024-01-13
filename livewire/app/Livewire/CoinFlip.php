@@ -12,7 +12,16 @@ class CoinFlip extends Component
 
     public function flip() {
         $this->last = $this->coin;
+        sleep(2);
         $this->coin = rand(0, 1) ? 'Heads!' : 'Tails!';
+    }
+
+    public function placeholder() {
+        return '<div>Looking for a coin</div>';
+    }
+
+    public function mount() {
+        $this->flip();
     }
 
     public function render()
