@@ -1,8 +1,7 @@
 <div>
     <form wire:submit="search">
-        <input type="text" wire:model="query">
-
-        <button type="submit">Search users</button>
+        <input class="bg-gray-100" type="text" wire:model.live="query">
+        <div>@error('query') {{ $message }} @enderror</div>
     </form>
     <ul>
         @foreach ($users as $user)
