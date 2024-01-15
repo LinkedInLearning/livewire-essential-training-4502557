@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,6 +13,8 @@ class UserList extends Component
 
     #[Validate]
     public string $query = '';
+
+    public int $numberOfUsers = 10;
 
     public function search() {
         $this->resetPage();
@@ -24,6 +27,7 @@ class UserList extends Component
         ];
     }
 
+    #[On('delete-user')]
     public function render()
     {
         $query = $this->query;
@@ -32,9 +36,11 @@ class UserList extends Component
             $query = '';
         }
 
+        $numberOfUsers = (int) $this->numberOfUsers;
+
         return view('livewire.user-list',
             ['users' => 
-            \App\Models\User::where('name', 'like', '%' . $query . '%')->paginate(10, pageName: 'users-list' ) ,
+            \App\Models\User::where('name', 'like', '%' . $query . '%')->paginate($numberOfUsers, pageName: 'users-list' ) ,
         ]);
     }
 }
